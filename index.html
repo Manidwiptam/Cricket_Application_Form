@@ -92,27 +92,17 @@
             <textarea class="form-control" name="Address"></textarea>
           </div>
           <div class="form-group">
-            <p>Role</p>
-  <input type="hidden" name="Role" value=""> <input type="checkbox" id="rhb" name="Role[]" value="Right Hand Batsman">
-  <label for="rhb">Right Hand Batsman</label><br>
-
-  <input type="checkbox" id="lhb" name="Role[]" value="Left Hand Batsman">
-  <label for="lhb">Left Hand Batsman</label><br>
-
-  <input type="checkbox" id="rhbwr" name="Role[]" value="Right Hand Bowler">
-  <label for="rhbwr">Right Hand Bowler</label><br>
-
-  <input type="checkbox" id="lhbwr" name="Role[]" value="Left Hand Bowler">
-  <label for="lhbwr">Left Hand Bowler</label><br>
-
-  <input type="checkbox" id="allrounder" name="Role[]" value="All-rounder">
-  <label for="allrounder">All-rounder</label><br>
-
-  <input type="checkbox" id="wk" name="Role[]" value="Wicket-Keeper">
-  <label for="wk">Wicket-Keeper</label><br>
-
-  <input type="checkbox" id="wkb" name="Role[]" value="Wicket-Keeper Batsman">
-  <label for="wkb">Wicket-Keeper Batsman</label><br>
+          <label>Role</label>
+            <select class="form-control" name="Role" required>
+              <option value="">-- Select Role --</option>
+              <option>Right Hand Batsman</option>
+              <option>Left Hand Batsman</option>
+              <option>Right Hand Bowler</option>
+              <option>Left Hand Bowler</option>
+              <option>All-rounder</option>
+              <option>Wicket-Keeper</option>
+              <option>Wicket-Keeper Batsman</option>
+            </select>
           </div>
           <div class="form-group">
             <label>Base Price (₹)</label>
@@ -198,6 +188,7 @@
 </body>
 
 </html>
+
 
 
 
