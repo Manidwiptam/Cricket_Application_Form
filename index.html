@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>KALYANI MSCL REGISTRATION FORM</title>
+  <title>REGISTRATION FORM</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <style>
     /* Color palette from MSCL logo */
@@ -201,19 +201,19 @@
 <body>
   <div class="form-container">
     <div class="header-row">
-      <div class="logo-box" title="MSCL Logo">
-        <!-- REPLACE the src value with your full base64 data URL (starts with data:image/...) OR a URL/path -->
-        <img src="C:\Users\manid\Desktop\COADING\1 Project (Cricket Form MSCL)\Scrap Works\Logo.jpeg" alt="Kalyani MSCL Logo">
+      <div class="logo-box" title="Logo">
+        <!-- Replace src with a repo-relative path or data URL when deploying -->
+        <img src="LOGO.jpg" alt="Kalyani MSCL Logo">
       </div>
       <div>
-        <h2>KALYANI MSCL REGISTRATION FORM</h2>
+        <h2>REGISTRATION FORM</h2>
         <div class="subtitle">Player registration • Use accurate details • Fields marked required must be filled</div>
       </div>
     </div>
 
     <form id="playerForm" enctype="multipart/form-data">
       <div class="form-grid">
-        <!-- Left Side -->
+        <!-- Left Side (sequence follows your list) -->
         <div class="form-left">
           <div class="form-group">
             <label for="group">Group</label>
@@ -268,47 +268,55 @@
             </select>
           </div>
 
-          <div class="form-group">
-            <label for="role">Role</label>
-            <select id="role" class="form-control" name="Role" required>
-              <option value="">-- Select Role --</option>
-              <option>Batsman</option>
-              <option>Bowler</option>
-              <option>All-rounder</option>
-              <option>Wicket-Keeper Batsman</option>
-            </select>
-          </div>
-
           <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="role">Role</label>
+              <select id="role" class="form-control" name="Role" required>
+                <option value="">-- Select Role --</option>
+                <option>Batsman</option>
+                <option>Bowler</option>
+                <option>All-rounder</option>
+                <option>Wicket-Keeper Batsman</option>
+              </select>
+            </div>
+
             <div class="form-group col-md-6">
               <label for="basePrice">Base Price (₹)</label>
               <input id="basePrice" type="number" class="form-control" name="Base Price" required>
             </div>
-            <div class="form-group col-md-6">
-              <label for="jerseySize">Jersey Size</label>
-              <input id="jerseySize" type="text" class="form-control" name="Jersey Size" placeholder="e.g. 36, 38, 40" required>
-            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="jerseySize">Jersey Size</label>
+            <input id="jerseySize" type="text" class="form-control" name="Jersey Size" placeholder="e.g. 36, 38, 40" required>
           </div>
         </div>
 
-        <!-- Right Side -->
+        <!-- Right Side: Photo, Document1, Document2 -->
         <div class="form-right">
           <div class="photo-box" id="photoPreview">
             <span>Preview</span>
           </div>
-          <label for="media">Upload Photo</label>
-          <input id="media" type="file" class="form-control-file" name="media" accept="image/*">
+          <label for="media">Photo</label>
+          <input id="media" type="file" class="form-control-file mb-3" name="media" accept="image/*">
 
-          <!-- Documents upload area -->
-          <div style="margin-top:18px; text-align:left;">
-            <label for="documents">Documents</label>
-            <input id="documents" type="file" class="form-control-file" name="documents" accept=".pdf,image/*" multiple>
-            <small class="form-text text-muted">You may upload up to 2 documents (PDF or image). Previews appear below.</small>
-
-            <div class="doc-previews" id="docPreviews" aria-live="polite" style="margin-top:8px;">
-              <div class="doc-preview empty" id="docPreview1">No file</div>
-              <div class="doc-preview empty" id="docPreview2">No file</div>
+          <!-- Document1 -->
+          <div style="margin-top:6px; text-align:left;">
+            <label for="document1">Document1</label>
+            <input id="document1" type="file" class="form-control-file" name="document1" accept=".pdf,image/*">
+            <div class="doc-previews" style="margin-top:8px;">
+              <div class="doc-preview empty" id="doc1Preview">No file</div>
             </div>
+          </div>
+
+          <!-- Document2 -->
+          <div style="margin-top:12px; text-align:left;">
+            <label for="document2">Document2</label>
+            <input id="document2" type="file" class="form-control-file" name="document2" accept=".pdf,image/*">
+            <div class="doc-previews" style="margin-top:8px;">
+              <div class="doc-preview empty" id="doc2Preview">No file</div>
+            </div>
+            <small class="form-text text-muted">Each document max 5 MB. Supported: PDF, images.</small>
           </div>
         </div>
       </div>
@@ -322,16 +330,17 @@
   </div>
 
   <script>
-    const scriptURL = "https://script.google.com/macros/s/AKfycbwYWCFBEoKCIVN0zKpuZk20X-obJlRzPCzL4xdTXkIST1-PWWG3m2uWpM2jYJE1JitR/exec";
+    const scriptURL = "https://script.google.com/macros/s/AKfycby6IZ51q7QUQNjkjYZWjjLXvRlbpaqWYPhZcHbiiP3O1hFtogex_U_65Uni8rBDO4Fa/exec";
     const form = document.getElementById("playerForm");
     const fileInput = document.getElementById("media");
     const photoPreview = document.getElementById("photoPreview");
     const clearBtn = document.getElementById("clearBtn");
     const submitBtn = document.getElementById("submitBtn");
 
-    const documentsInput = document.getElementById("documents");
-    const docPreview1 = document.getElementById("docPreview1");
-    const docPreview2 = document.getElementById("docPreview2");
+    const doc1Input = document.getElementById("document1");
+    const doc2Input = document.getElementById("document2");
+    const doc1Preview = document.getElementById("doc1Preview");
+    const doc2Preview = document.getElementById("doc2Preview");
 
     // Photo preview
     fileInput.addEventListener("change", () => {
@@ -347,49 +356,56 @@
       }
     });
 
-    // Documents preview (handles up to 2 documents)
-    documentsInput.addEventListener("change", () => {
-      const files = Array.from(documentsInput.files || []);
-      // Clear both previews
-      [docPreview1, docPreview2].forEach(el => {
-        el.innerHTML = "No file";
-        el.classList.add('empty');
-      });
+    // Document1 preview
+    doc1Input.addEventListener("change", () => {
+      const file = doc1Input.files[0];
+      doc1Preview.classList.remove('empty');
+      if (!file) {
+        doc1Preview.innerHTML = "No file";
+        doc1Preview.classList.add('empty');
+        return;
+      }
+      if (file.type.startsWith("image/")) {
+        const reader = new FileReader();
+        reader.onload = e => doc1Preview.innerHTML = `<img src="${e.target.result}" alt="${file.name}">`;
+        reader.readAsDataURL(file);
+      } else if (file.type === "application/pdf" || file.name.toLowerCase().endsWith('.pdf')) {
+        const url = URL.createObjectURL(file);
+        doc1Preview.innerHTML = `<object data="${url}" type="application/pdf" width="100%" height="100%"></object>`;
+      } else {
+        doc1Preview.innerHTML = `<div style="padding:8px; text-align:center;">${file.name}</div>`;
+      }
+    });
 
-      // Preview logic for first two files
-      files.slice(0,2).forEach((file, idx) => {
-        const target = idx === 0 ? docPreview1 : docPreview2;
-        // Remove empty class
-        target.classList.remove('empty');
-        // If image type -> show <img>
-        if (file.type.startsWith("image/")) {
-          const reader = new FileReader();
-          reader.onload = e => {
-            target.innerHTML = `<img src="${e.target.result}" alt="${file.name}">`;
-          };
-          reader.readAsDataURL(file);
-        } else if (file.type === "application/pdf" || file.name.toLowerCase().endsWith('.pdf')) {
-          // For PDFs use object with blob URL
-          const url = URL.createObjectURL(file);
-          // Use an <object> to preview first page (browser dependent)
-          target.innerHTML = `<object data="${url}" type="application/pdf" aria-label="${file.name}" width="100%" height="100%"></object>`;
-          // Release object URL when not needed (not doing it immediately so preview shows)
-          // We'll revoke when a new file replaces it or form reset happens
-        } else {
-          // Unknown types: show filename
-          target.innerHTML = `<div style="padding:8px; text-align:center;">${file.name}</div>`;
-        }
-      });
+    // Document2 preview
+    doc2Input.addEventListener("change", () => {
+      const file = doc2Input.files[0];
+      doc2Preview.classList.remove('empty');
+      if (!file) {
+        doc2Preview.innerHTML = "No file";
+        doc2Preview.classList.add('empty');
+        return;
+      }
+      if (file.type.startsWith("image/")) {
+        const reader = new FileReader();
+        reader.onload = e => doc2Preview.innerHTML = `<img src="${e.target.result}" alt="${file.name}">`;
+        reader.readAsDataURL(file);
+      } else if (file.type === "application/pdf" || file.name.toLowerCase().endsWith('.pdf')) {
+        const url = URL.createObjectURL(file);
+        doc2Preview.innerHTML = `<object data="${url}" type="application/pdf" width="100%" height="100%"></object>`;
+      } else {
+        doc2Preview.innerHTML = `<div style="padding:8px; text-align:center;">${file.name}</div>`;
+      }
     });
 
     // Reset handling
     clearBtn.addEventListener("click", () => {
       setTimeout(() => {
         photoPreview.innerHTML = "<span>Preview</span>";
-        docPreview1.innerHTML = "No file";
-        docPreview2.innerHTML = "No file";
-        docPreview1.classList.add('empty');
-        docPreview2.classList.add('empty');
+        doc1Preview.innerHTML = "No file";
+        doc2Preview.innerHTML = "No file";
+        doc1Preview.classList.add('empty');
+        doc2Preview.classList.add('empty');
       }, 10);
       document.getElementById('msg').innerText = '';
     });
@@ -409,30 +425,34 @@
         return;
       }
 
-      // Optional file size checks (photo max 2.5 MB, each doc max 5 MB)
+      // File size checks
       if (fileInput.files.length > 0 && fileInput.files[0].size > 2.5 * 1024 * 1024) {
         msg.innerText = "❌ Photo too large. Max 2.5 MB.";
         submitBtn.disabled = false;
         return;
       }
-      const docs = documentsInput.files || [];
-      for (let i = 0; i < docs.length && i < 2; i++) {
-        if (docs[i].size > 5 * 1024 * 1024) {
-          msg.innerText = "❌ Document too large. Each doc max 5 MB.";
-          submitBtn.disabled = false;
-          return;
-        }
+      if (doc1Input.files.length > 0 && doc1Input.files[0].size > 5 * 1024 * 1024) {
+        msg.innerText = "❌ Document1 too large. Max 5 MB.";
+        submitBtn.disabled = false;
+        return;
+      }
+      if (doc2Input.files.length > 0 && doc2Input.files[0].size > 5 * 1024 * 1024) {
+        msg.innerText = "❌ Document2 too large. Max 5 MB.";
+        submitBtn.disabled = false;
+        return;
       }
 
       const formData = new FormData(form);
-
-      // Attach photo as base64 if present (as your previous flow expects)
       const tasks = [];
+
+      // Photo -> base64 (strip prefix) and set key 'media'
       if (fileInput.files.length > 0) {
         const p = new Promise((resolve) => {
           const reader = new FileReader();
           reader.onload = function() {
-            formData.set("media", reader.result.split(",")[1]);
+            // strip "data:*/*;base64," prefix if present
+            const base64 = reader.result.split(",")[1] || reader.result;
+            formData.set("media", base64);
             resolve();
           };
           reader.readAsDataURL(fileInput.files[0]);
@@ -440,22 +460,34 @@
         tasks.push(p);
       }
 
-      // Attach documents: include up to two docs as base64 fields 'document1' and 'document2'
-      if (documentsInput.files.length > 0) {
-        Array.from(documentsInput.files).slice(0,2).forEach((f, i) => {
-          const p = new Promise((resolve) => {
-            const reader = new FileReader();
-            reader.onload = function() {
-              // For PDF/image add base64 content
-              formData.set(`document${i+1}`, reader.result.split(",")[1]);
-              // Also set original filename
-              formData.set(`document${i+1}_name`, f.name);
-              resolve();
-            };
-            reader.readAsDataURL(f);
-          });
-          tasks.push(p);
+      // Document1 -> document1 & document1_name
+      if (doc1Input.files.length > 0) {
+        const p1 = new Promise((resolve) => {
+          const reader = new FileReader();
+          reader.onload = function() {
+            const base64 = reader.result.split(",")[1] || reader.result;
+            formData.set("document1", base64);
+            formData.set("document1_name", doc1Input.files[0].name);
+            resolve();
+          };
+          reader.readAsDataURL(doc1Input.files[0]);
         });
+        tasks.push(p1);
+      }
+
+      // Document2 -> document2 & document2_name
+      if (doc2Input.files.length > 0) {
+        const p2 = new Promise((resolve) => {
+          const reader = new FileReader();
+          reader.onload = function() {
+            const base64 = reader.result.split(",")[1] || reader.result;
+            formData.set("document2", base64);
+            formData.set("document2_name", doc2Input.files[0].name);
+            resolve();
+          };
+          reader.readAsDataURL(doc2Input.files[0]);
+        });
+        tasks.push(p2);
       }
 
       Promise.all(tasks).then(() => {
@@ -471,10 +503,10 @@
             document.getElementById("msg").innerText = "✅ Submitted successfully!";
             form.reset();
             photoPreview.innerHTML = "<span>Preview</span>";
-            docPreview1.innerHTML = "No file";
-            docPreview2.innerHTML = "No file";
-            docPreview1.classList.add('empty');
-            docPreview2.classList.add('empty');
+            doc1Preview.innerHTML = "No file";
+            doc2Preview.innerHTML = "No file";
+            doc1Preview.classList.add('empty');
+            doc2Preview.classList.add('empty');
           } else {
             document.getElementById("msg").innerText = "❌ Error: " + (res.error || 'Unknown error');
           }
