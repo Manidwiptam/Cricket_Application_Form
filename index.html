@@ -1,112 +1,293 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>REGISTRATION FORM</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>KALYANI MSCL REGISTRATION FORM</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <style>
+    /* Color palette from MSCL logo */
+    :root {
+      --primary: #0033cc;
+      --accent-red: #e53935;
+      --accent-orange: #ff9800;
+      --dark: #0b2d66;
+      --muted: #f4f6f9;
+    }
+
+    /* Animations */
+    @keyframes floatUp {
+      from { transform: translateY(12px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.025); }
+      100% { transform: scale(1); }
+    }
+    @keyframes logoBounce {
+      0% { transform: translateY(0); }
+      30% { transform: translateY(-6px); }
+      60% { transform: translateY(0); }
+      100% { transform: translateY(-2px); }
+    }
+
     body {
-      background: #f8f9fa;
+      background: linear-gradient(180deg, #ffffff 0%, var(--muted) 100%);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      color: var(--dark);
     }
     .form-container {
-      max-width: 800px;
-      margin: 40px auto;
-      padding: 30px;
-      background: #fff;
-      border-radius: 10px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-      animation: fadeIn 1s ease-in-out;
+      max-width: 960px;
+      margin: 36px auto;
+      padding: 28px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 12px 40px rgba(11,45,102,0.08);
+      border-left: 6px solid var(--primary);
+      overflow: hidden;
+      animation: floatUp 600ms ease both;
+    }
+    .header-row {
+      display:flex;
+      align-items:center;
+      gap:16px;
+      border-bottom: 1px solid rgba(3,3,3,0.06);
+      padding-bottom: 12px;
+      margin-bottom: 18px;
+      animation: floatUp 700ms ease both;
+    }
+    .logo-box {
+      flex: 0 0 88px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background: linear-gradient(180deg, rgba(0,51,204,0.06), rgba(255,152,0,0.03));
+      padding:8px;
+      border-radius:8px;
+      transition: transform 300ms ease;
+      will-change: transform;
+      animation: logoBounce 2000ms ease-in-out infinite;
+    }
+    .logo-box img {
+      max-width:88px;
+      max-height:88px;
+      display:block;
+      border-radius:6px;
     }
     h2 {
-      text-align: center;
-      margin-bottom: 25px;
-      font-weight: bold;
+      margin:0;
+      font-weight:700;
+      color: var(--primary);
+      letter-spacing: 0.6px;
+      font-size:1.45rem;
+      text-shadow: 0 1px 0 rgba(255,255,255,0.6);
     }
+    .subtitle {
+      color: var(--dark);
+      opacity:0.85;
+      font-size:0.95rem;
+      margin-top:4px;
+    }
+
     .form-grid {
       display: flex;
       gap: 20px;
+      animation: floatUp 800ms ease both;
     }
     .form-left { flex: 2; }
     .form-right { flex: 1; text-align: center; }
+
     .photo-box {
       width: 150px;
       height: 180px;
-      border: 1px solid #ccc;
+      border: 2px dashed rgba(0,51,204,0.12);
       margin: 0 auto 10px;
-      background: #fafafa;
-      border-radius: 6px;
+      background: linear-gradient(180deg, #ffffff, rgba(3,3,3,0.01));
+      border-radius: 8px;
       display: flex;
       align-items: center;
       justify-content: center;
       overflow: hidden;
+      transition: box-shadow 260ms ease, transform 260ms ease;
     }
     .photo-box img {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
-    button {
-      min-width: 120px;
-      font-weight: bold;
-    }
-    .btn-submit { background: #28a745; color: #fff; }
-    .btn-clear { background: #dc3545; color: #fff; }
-    #msg { margin-top: 15px; text-align: center; font-weight: bold; }
+    .photo-box:hover { box-shadow: 0 10px 22px rgba(3,51,204,0.08); transform: translateY(-4px); }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
+    .doc-previews {
+      display:flex;
+      gap:10px;
+      justify-content:center;
+      margin-top:10px;
+    }
+    .doc-preview {
+      width: 130px;
+      height: 100px;
+      border-radius:8px;
+      border: 2px dashed rgba(11,45,102,0.08);
+      background: #fff;
+      overflow: hidden;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:12px;
+      color: rgba(11,45,102,0.6);
+      transition: transform 220ms ease, box-shadow 220ms ease;
+    }
+    .doc-preview iframe, .doc-preview object, .doc-preview img {
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+    .doc-preview.empty { background: linear-gradient(180deg,#fbfbff, #ffffff); }
+    .doc-preview:hover { transform: translateY(-6px); box-shadow: 0 10px 24px rgba(3,51,204,0.06); }
+
+    label { font-weight:600; color:var(--dark); }
+    input.form-control, select.form-control, textarea.form-control {
+      border-radius:6px;
+      box-shadow: none;
+      border: 1px solid #dfe7fd;
+    }
+    input.form-control:focus, select.form-control:focus, textarea.form-control:focus {
+      border-color: var(--primary);
+      box-shadow: 0 8px 26px rgba(0,51,204,0.06);
+      outline: none;
+    }
+
+    .btn-submit {
+      background: linear-gradient(90deg, var(--primary), var(--dark));
+      color: #fff;
+      border: none;
+      min-width: 120px;
+      font-weight:700;
+      border-radius:8px;
+      padding:10px 18px;
+      box-shadow: 0 6px 18px rgba(3,51,204,0.12);
+      transition: transform 160ms ease, box-shadow 160ms ease;
+    }
+    .btn-submit:hover { transform: translateY(-4px); box-shadow: 0 14px 30px rgba(3,51,204,0.16); }
+    .btn-clear {
+      background: #fff;
+      color: var(--accent-red);
+      border: 1px solid rgba(229,57,53,0.14);
+      min-width: 120px;
+      font-weight:700;
+      border-radius:8px;
+      padding:10px 18px;
+      margin-left:8px;
+    }
+    .btn-submit:disabled {
+      opacity:0.6;
+      cursor:not-allowed;
+      transform:none;
+      box-shadow:none;
+    }
+
+    #msg { margin-top: 12px; text-align: center; font-weight: 700; }
+
+    @media (max-width: 767px) {
+      .form-grid { flex-direction: column; }
+      .form-right { text-align: left; }
+      .logo-box { flex: 0 0 64px; }
+      .doc-previews { justify-content:flex-start; }
+      .doc-preview { width: 44%; height: 90px; }
     }
   </style>
 </head>
 <body>
   <div class="form-container">
-    <h2>REGISTRATION FORM</h2>
+    <div class="header-row">
+      <div class="logo-box" title="MSCL Logo">
+        <!-- REPLACE the src value with your full base64 data URL (starts with data:image/...) OR a URL/path -->
+        <img src="C:\Users\manid\Desktop\COADING\1 Project (Cricket Form MSCL)\Scrap Works\Logo.jpeg" alt="Kalyani MSCL Logo">
+      </div>
+      <div>
+        <h2>KALYANI MSCL REGISTRATION FORM</h2>
+        <div class="subtitle">Player registration • Use accurate details • Fields marked required must be filled</div>
+      </div>
+    </div>
+
     <form id="playerForm" enctype="multipart/form-data">
       <div class="form-grid">
         <!-- Left Side -->
         <div class="form-left">
           <div class="form-group">
-            <label>Group</label>
-            <input type="text" class="form-control" name="Group" required>
+            <label for="group">Group</label>
+            <input id="group" type="text" class="form-control" name="Group" required>
           </div>
+
           <div class="form-group">
-            <label>Serial Number</label>
-            <input type="text" class="form-control" name="Serial Number" required>
+            <label for="status">Status</label>
+            <input id="status" type="text" class="form-control" name="Status">
           </div>
+
           <div class="form-group">
-            <label>Full Name</label>
-            <input type="text" class="form-control" name="Full Name" required>
+            <label for="serialNumber">Serial Number</label>
+            <input id="serialNumber" type="text" class="form-control" name="Serial Number" required>
           </div>
+
           <div class="form-group">
-            <label>Nick Name</label>
-            <input type="text" class="form-control" name="Nick Name">
+            <label for="fullName">Full Name</label>
+            <input id="fullName" type="text" class="form-control" name="Full Name" required>
           </div>
+
           <div class="form-group">
-            <label>Age</label>
-            <input type="number" class="form-control" name="Age" required>
+            <label for="nickName">Nick Name</label>
+            <input id="nickName" type="text" class="form-control" name="Nick Name">
           </div>
-          <div class="form-group">
-            <label>Address</label>
-            <textarea class="form-control" name="Address"></textarea>
+
+          <div class="form-row">
+            <div class="form-group col-md-4">
+              <label for="age">Age</label>
+              <input id="age" type="number" class="form-control" name="Age" required min="1">
+            </div>
+
+            <div class="form-group col-md-8">
+              <label for="phoneNumber">Phone Number</label>
+              <input id="phoneNumber" type="tel" class="form-control" name="Phone Number"
+                     required pattern="^[0-9]{10}$" maxlength="10" inputmode="numeric" placeholder="10 digits">
+              <small class="form-text text-muted">Enter exactly 10 digits (numbers only).</small>
+            </div>
           </div>
+
           <div class="form-group">
-          <label>Role</label>
-            <select class="form-control" name="Role" required>
+            <label for="address">Address</label>
+            <textarea id="address" class="form-control" name="Address"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="playerZone">Player Zone</label>
+            <select id="playerZone" class="form-control" name="Player Zone" required>
+              <option value="">-- Select Player Zone --</option>
+              <option>Kalyani / Kanchrapara Gram Panchayet</option>
+              <option>Outside of Kalyani</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="role">Role</label>
+            <select id="role" class="form-control" name="Role" required>
               <option value="">-- Select Role --</option>
-              <option>Right Hand Batsman</option>
-              <option>Left Hand Batsman</option>
-              <option>Right Hand Bowler</option>
-              <option>Left Hand Bowler</option>
+              <option>Batsman</option>
+              <option>Bowler</option>
               <option>All-rounder</option>
-              <option>Wicket-Keeper</option>
               <option>Wicket-Keeper Batsman</option>
             </select>
           </div>
-          <div class="form-group">
-            <label>Base Price (₹)</label>
-            <input type="number" class="form-control" name="Base Price" required>
+
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="basePrice">Base Price (₹)</label>
+              <input id="basePrice" type="number" class="form-control" name="Base Price" required>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="jerseySize">Jersey Size</label>
+              <input id="jerseySize" type="text" class="form-control" name="Jersey Size" placeholder="e.g. 36, 38, 40" required>
+            </div>
           </div>
         </div>
 
@@ -115,32 +296,50 @@
           <div class="photo-box" id="photoPreview">
             <span>Preview</span>
           </div>
-          <label>Upload Photo</label>
-          <input type="file" class="form-control-file" name="media" id="media" accept="image/*">
+          <label for="media">Upload Photo</label>
+          <input id="media" type="file" class="form-control-file" name="media" accept="image/*">
+
+          <!-- Documents upload area -->
+          <div style="margin-top:18px; text-align:left;">
+            <label for="documents">Documents</label>
+            <input id="documents" type="file" class="form-control-file" name="documents" accept=".pdf,image/*" multiple>
+            <small class="form-text text-muted">You may upload up to 2 documents (PDF or image). Previews appear below.</small>
+
+            <div class="doc-previews" id="docPreviews" aria-live="polite" style="margin-top:8px;">
+              <div class="doc-preview empty" id="docPreview1">No file</div>
+              <div class="doc-preview empty" id="docPreview2">No file</div>
+            </div>
+          </div>
         </div>
       </div>
 
-      <!-- Buttons -->
       <div class="text-center mt-3">
-        <button type="submit" class="btn btn-submit">Submit</button>
-        <button type="reset" class="btn btn-clear">Clear Form</button>
+        <button type="submit" class="btn btn-submit" id="submitBtn">Submit</button>
+        <button type="reset" class="btn btn-clear" id="clearBtn">Clear Form</button>
       </div>
     </form>
     <div id="msg"></div>
   </div>
 
   <script>
-    const scriptURL = "https://script.google.com/macros/s/AKfycby6IZ51q7QUQNjkjYZWjjLXvRlbpaqWYPhZcHbiiP3O1hFtogex_U_65Uni8rBDO4Fa/exec";
+    const scriptURL = "https://script.google.com/macros/s/AKfycbwYWCFBEoKCIVN0zKpuZk20X-obJlRzPCzL4xdTXkIST1-PWWG3m2uWpM2jYJE1JitR/exec";
     const form = document.getElementById("playerForm");
     const fileInput = document.getElementById("media");
     const photoPreview = document.getElementById("photoPreview");
+    const clearBtn = document.getElementById("clearBtn");
+    const submitBtn = document.getElementById("submitBtn");
 
-    // 📷 Preview photo
+    const documentsInput = document.getElementById("documents");
+    const docPreview1 = document.getElementById("docPreview1");
+    const docPreview2 = document.getElementById("docPreview2");
+
+    // Photo preview
     fileInput.addEventListener("change", () => {
       if (fileInput.files && fileInput.files[0]) {
         const reader = new FileReader();
         reader.onload = e => {
           photoPreview.innerHTML = `<img src="${e.target.result}" alt="Preview">`;
+          photoPreview.classList.remove('empty');
         };
         reader.readAsDataURL(fileInput.files[0]);
       } else {
@@ -148,24 +347,120 @@
       }
     });
 
-    // 📨 Submit form
+    // Documents preview (handles up to 2 documents)
+    documentsInput.addEventListener("change", () => {
+      const files = Array.from(documentsInput.files || []);
+      // Clear both previews
+      [docPreview1, docPreview2].forEach(el => {
+        el.innerHTML = "No file";
+        el.classList.add('empty');
+      });
+
+      // Preview logic for first two files
+      files.slice(0,2).forEach((file, idx) => {
+        const target = idx === 0 ? docPreview1 : docPreview2;
+        // Remove empty class
+        target.classList.remove('empty');
+        // If image type -> show <img>
+        if (file.type.startsWith("image/")) {
+          const reader = new FileReader();
+          reader.onload = e => {
+            target.innerHTML = `<img src="${e.target.result}" alt="${file.name}">`;
+          };
+          reader.readAsDataURL(file);
+        } else if (file.type === "application/pdf" || file.name.toLowerCase().endsWith('.pdf')) {
+          // For PDFs use object with blob URL
+          const url = URL.createObjectURL(file);
+          // Use an <object> to preview first page (browser dependent)
+          target.innerHTML = `<object data="${url}" type="application/pdf" aria-label="${file.name}" width="100%" height="100%"></object>`;
+          // Release object URL when not needed (not doing it immediately so preview shows)
+          // We'll revoke when a new file replaces it or form reset happens
+        } else {
+          // Unknown types: show filename
+          target.innerHTML = `<div style="padding:8px; text-align:center;">${file.name}</div>`;
+        }
+      });
+    });
+
+    // Reset handling
+    clearBtn.addEventListener("click", () => {
+      setTimeout(() => {
+        photoPreview.innerHTML = "<span>Preview</span>";
+        docPreview1.innerHTML = "No file";
+        docPreview2.innerHTML = "No file";
+        docPreview1.classList.add('empty');
+        docPreview2.classList.add('empty');
+      }, 10);
+      document.getElementById('msg').innerText = '';
+    });
+
+    // Form submit
     form.addEventListener("submit", e => {
       e.preventDefault();
       const msg = document.getElementById("msg");
       msg.innerText = "Submitting...";
+      submitBtn.disabled = true;
+
+      const phoneInput = document.getElementById('phoneNumber');
+      if (!phoneInput.checkValidity()) {
+        phoneInput.reportValidity();
+        msg.innerText = '';
+        submitBtn.disabled = false;
+        return;
+      }
+
+      // Optional file size checks (photo max 2.5 MB, each doc max 5 MB)
+      if (fileInput.files.length > 0 && fileInput.files[0].size > 2.5 * 1024 * 1024) {
+        msg.innerText = "❌ Photo too large. Max 2.5 MB.";
+        submitBtn.disabled = false;
+        return;
+      }
+      const docs = documentsInput.files || [];
+      for (let i = 0; i < docs.length && i < 2; i++) {
+        if (docs[i].size > 5 * 1024 * 1024) {
+          msg.innerText = "❌ Document too large. Each doc max 5 MB.";
+          submitBtn.disabled = false;
+          return;
+        }
+      }
 
       const formData = new FormData(form);
 
+      // Attach photo as base64 if present (as your previous flow expects)
+      const tasks = [];
       if (fileInput.files.length > 0) {
-        const reader = new FileReader();
-        reader.onload = function() {
-          formData.append("media", reader.result.split(",")[1]); // Base64
-          submitForm(formData);
-        };
-        reader.readAsDataURL(fileInput.files[0]);
-      } else {
-        submitForm(formData);
+        const p = new Promise((resolve) => {
+          const reader = new FileReader();
+          reader.onload = function() {
+            formData.set("media", reader.result.split(",")[1]);
+            resolve();
+          };
+          reader.readAsDataURL(fileInput.files[0]);
+        });
+        tasks.push(p);
       }
+
+      // Attach documents: include up to two docs as base64 fields 'document1' and 'document2'
+      if (documentsInput.files.length > 0) {
+        Array.from(documentsInput.files).slice(0,2).forEach((f, i) => {
+          const p = new Promise((resolve) => {
+            const reader = new FileReader();
+            reader.onload = function() {
+              // For PDF/image add base64 content
+              formData.set(`document${i+1}`, reader.result.split(",")[1]);
+              // Also set original filename
+              formData.set(`document${i+1}_name`, f.name);
+              resolve();
+            };
+            reader.readAsDataURL(f);
+          });
+          tasks.push(p);
+        });
+      }
+
+      Promise.all(tasks).then(() => {
+        submitForm(formData);
+      });
     });
 
     function submitForm(formData) {
@@ -176,20 +471,20 @@
             document.getElementById("msg").innerText = "✅ Submitted successfully!";
             form.reset();
             photoPreview.innerHTML = "<span>Preview</span>";
+            docPreview1.innerHTML = "No file";
+            docPreview2.innerHTML = "No file";
+            docPreview1.classList.add('empty');
+            docPreview2.classList.add('empty');
           } else {
-            document.getElementById("msg").innerText = "❌ Error: " + res.error;
+            document.getElementById("msg").innerText = "❌ Error: " + (res.error || 'Unknown error');
           }
+          submitBtn.disabled = false;
         })
         .catch(err => {
           document.getElementById("msg").innerText = "❌ Network error: " + err;
+          submitBtn.disabled = false;
         });
     }
   </script>
 </body>
-
 </html>
-
-
-
-
-
